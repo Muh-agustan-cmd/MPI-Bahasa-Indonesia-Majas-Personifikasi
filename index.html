@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Media Interaktif PID: Majas Personifikasi</title>
+<style>
+:root{--bg:#eef7f9;--card:#fff;--ink:#0b2a3d;--mut:#4a6677;--tide:#1c7c9a;--tide2:#d4eef4;--sun:#ffc93c;--ok:#2f9e63;--no:#e0584a;--line:#b9d6df;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08202c;--card:#0f3144;--ink:#e8f6fa;--mut:#9fc1cf;--tide:#4fb8d6;--tide2:#16485f;--sun:#ffd25e;--ok:#4cc58a;--no:#ff7d6e;--line:#2a5870}}
+:root[data-theme="dark"]{--bg:#08202c;--card:#0f3144;--ink:#e8f6fa;--mut:#9fc1cf;--tide:#4fb8d6;--tide2:#16485f;--sun:#ffd25e;--ok:#4cc58a;--no:#ff7d6e;--line:#2a5870}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.5 "Trebuchet MS","Segoe UI",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--card);border-bottom:2px solid var(--line);padding:10px 16px 0}
+h1{font-size:1.25rem;margin:0 0 8px}
+nav{display:flex;gap:6px;overflow-x:auto}
+.tab{flex:1 0 auto;min-height:46px;padding:8px 14px;border:2px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;background:var(--tide2);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.tab[aria-selected=true]{background:var(--tide);color:#fff;border-color:var(--tide)}
+main{max-width:980px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px;position:relative}
+h2{font-size:1.5rem;margin:0 0 4px}h3{margin:0 0 8px}
+.fit{color:var(--mut);margin:0 0 12px;font-size:.95rem}
+button,.btn{font:inherit;min-height:46px;padding:8px 16px;border-radius:12px;border:2px solid var(--tide);background:var(--tide);color:#fff;font-weight:700;cursor:pointer}
+button.alt{background:transparent;color:var(--tide)}
+button:focus-visible,textarea:focus-visible,input:focus-visible,canvas:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+svg{max-width:100%;height:auto;display:block}
+.cap{background:var(--sun);color:#0b2a3d;border-radius:14px;padding:10px 14px;font-weight:700;margin-top:10px;min-height:48px}
+.chip{display:inline-block;padding:8px 14px;margin:4px;border-radius:999px;background:var(--tide2);border:2px solid var(--line);font-weight:700;user-select:none;cursor:grab}
+.slot,.zone{min-height:54px;border:3px dashed var(--line);border-radius:12px;padding:8px 12px;margin:6px 0}
+.zone{min-height:150px}
+.slot.ok,.zone.ok{border-style:solid;border-color:var(--ok)}
+.slot.ok{background:var(--tide2)}
+.no{animation:sh .3s;border-color:var(--no)!important}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.sent{padding:10px 12px;border-radius:10px;cursor:pointer;display:inline}
+.sent.hl{background:var(--sun);color:#0b2a3d}
+.cardS{background:var(--tide2);border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;cursor:grab;touch-action:none}
+.cardS small{display:block;color:var(--mut)}
+#wheelBox{position:relative;width:min(100%,340px);margin:auto}
+#wheel{transition:transform 4s cubic-bezier(.15,.7,.1,1);transform-origin:50% 50%}
+#ptr{position:absolute;top:-6px;left:50%;margin-left:-14px;border:14px solid transparent;border-top:26px solid var(--no)}
+textarea,input{width:100%;font:inherit;padding:10px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+#penWrap{position:relative;background:var(--card)}
+#pen{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;background:var(--tide2);color:var(--ink);border-color:var(--line)}
+.opt.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.opt.no{background:var(--no);color:#fff}
+.emo{font-size:2.2rem;min-width:84px;background:var(--tide2);border-color:var(--line);color:var(--ink)}
+.thumb{padding:4px;min-height:0;background:var(--tide2);border-color:var(--line);color:var(--ink);font-size:.9rem}
+.thumb[aria-pressed=true]{border-color:var(--tide);box-shadow:0 0 0 3px var(--tide)}
+.karya{background:var(--sun);color:#0b2a3d;border-radius:16px;padding:20px;font-size:1.3rem;font-style:italic;white-space:pre-line;min-height:110px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.w{animation:wv 3s linear infinite alternate}.paused .w,.paused .r{animation-play-state:paused}
+@keyframes wv{to{transform:translateX(-40px)}}
+.r{stroke-dasharray:10 10;animation:fl 1s linear infinite}@keyframes fl{to{stroke-dashoffset:-20}}
+</style></head><body>
+<header><h1>Majas Personifikasi: Ketika Alam Bisa Berbicara</h1>
+<nav role="tablist"><button class="tab" role="tab">1. Kegiatan Awal</button><button class="tab" role="tab">2. Memahami</button><button class="tab" role="tab">3. Mengaplikasi 1</button><button class="tab" role="tab">4. Mengaplikasi 2</button><button class="tab" role="tab">5. Merefleksi dan Penutup</button></nav></header>
+<main>
+
+<section class="pan">
+<h2>Kegiatan Awal</h2><p class="fit">Fitur PID: video dan roda putar</p>
+<div class="grid">
+<div class="card" id="vid"><h3>Pemantik: ombak dan sungai</h3>
+<svg viewBox="0 0 400 200" role="img" aria-label="Animasi ombak menerjang karang dan sungai meliuk"><rect width="400" height="200" fill="#9ad7f0"/><circle cx="340" cy="40" r="22" fill="#ffd24a"/><rect y="70" width="400" height="130" fill="#1f8fb5"/><g class="w"><path d="M-40 95q25-14 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0 50 0v20H-40z" fill="#46b3d3"/><path d="M-40 130q25-14 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0 50 0v20H-40z" fill="#46b3d3" opacity=".7"/></g><path d="M300 200l25-70 30 15 25-30 20 85z" fill="#6b6b6b"/><path d="M0 200V160q60-30 130 0t120 40z" fill="#5cae5c"/><path class="r" d="M20 200q40-30 20-50t50-30 30-30" fill="none" stroke="#e8f6fa" stroke-width="6" stroke-linecap="round"/></svg>
+<div class="cap" id="cap" aria-live="polite">Tekan Putar, lalu perhatikan.</div>
+<div class="row" style="margin-top:10px"><button id="play">Putar</button><button class="alt" id="ask">Munculkan pertanyaan</button></div></div>
+<div class="card"><h3>Roda putar penjawab</h3>
+<div id="wheelBox"><div id="ptr"></div><svg id="wheel" viewBox="0 0 200 200" role="img" aria-label="Roda putar nama"></svg></div>
+<p style="text-align:center"><button id="spin">Putar roda</button></p>
+<p id="win" aria-live="polite" style="text-align:center;font-size:1.4rem;font-weight:700;min-height:2em"></p>
+<label>Daftar nama (pisahkan dengan koma)<textarea id="names" rows="2">Aisyah, Budi, Citra, Dika, Eka, Fajar, Gita, Hasan</textarea></label></div>
+</div></section>
+
+<section class="pan" hidden>
+<h2>Memahami</h2><p class="fit">Fitur PID: anotasi tulisan dan drag and drop</p>
+<div class="card" id="penWrap"><h3>Bandingkan dua kalimat, lalu tulis simpulan di layar</h3>
+<p style="font-size:1.4rem">“Angin bertiup pelan.”<br>“Angin <b>membelai</b> wajahku.”</p>
+<p>Pada kalimat kedua, angin (benda mati) bertindak seperti manusia. Kalimat ini memakai <b>majas personifikasi</b>.</p>
+<p style="height:120px;color:var(--mut)">Tulis simpulanmu di sini dengan jari atau pulpen layar.</p>
+<canvas id="pen" width="900" height="520" tabindex="0" aria-label="Papan tulis anotasi"></canvas></div>
+<div class="row" style="margin-bottom:16px"><button data-c="#e0584a" class="alt pc">Merah</button><button data-c="#2a62d9" class="alt pc">Biru</button><button data-c="#1d1d1d" class="alt pc">Hitam</button><button class="alt" id="er">Penghapus</button><button class="alt" id="clr">Bersihkan</button></div>
+<div class="card"><h3>Cocokkan benda dengan perilaku manusia</h3><p class="fit">Seret kartu benda ke perilaku yang cocok.</p>
+<div class="grid"><div id="bends"></div><div id="slots"></div></div><p id="mmsg" aria-live="polite" style="font-weight:700"></p></div>
+</section>
+
+<section class="pan" hidden>
+<h2>Mengaplikasi 1</h2><p class="fit">Fitur PID: teks tayang, highlight, kotak klasifikasi</p>
+<div class="card"><h3>Banjir yang Marah</h3><p class="fit">Ketuk kalimat yang menurutmu “aneh jika benda yang melakukannya” untuk menyorotnya.</p>
+<p id="txt" style="line-height:2.1"></p></div>
+<div class="card"><h3>Seret setiap kalimat ke kotak yang tepat</h3><div id="pool"></div>
+<div class="grid"><div><b>Personifikasi</b><div class="zone" data-z="P"></div></div><div><b>Bukan personifikasi</b><div class="zone" data-z="N"></div></div></div>
+<p id="smsg" aria-live="polite" style="font-weight:700"></p></div>
+</section>
+
+<section class="pan" hidden>
+<h2>Mengaplikasi 2</h2><p class="fit">Fitur PID: galeri gambar dan bank kata</p>
+<div class="grid"><div class="card"><div class="row" id="thumbs"></div><div id="scene" style="margin-top:10px;border-radius:12px;overflow:hidden"></div>
+<p style="font-style:italic;white-space:pre-line" id="guru"></p></div>
+<div class="card"><h3>Bank kata perilaku manusia</h3><p class="fit">Ketuk kata untuk memasukkannya ke puisimu.</p><div id="bank"></div>
+<label><b>Puisiku</b> (4 sampai 6 baris)<textarea id="poem" rows="6" placeholder="Contoh: Sungai meliuk menari di antara sawah"></textarea></label></div></div>
+</section>
+
+<section class="pan" hidden>
+<h2>Merefleksi dan Penutup</h2><p class="fit">Fitur PID: tampilan karya, kuis, emoji</p>
+<div class="card"><h3>Gelar karya</h3><label>Judul puisi<input id="jud" placeholder="Judul karyamu"></label><div class="karya" id="kar" style="margin-top:10px"></div></div>
+<div class="card"><h3>Kuis akhir</h3><div id="quiz"></div></div>
+<div class="card"><h3>Bagaimana perasaanmu hari ini?</h3><div class="row" id="emos"></div><p id="emsg" aria-live="polite" style="font-weight:700"></p></div>
+</section>
+</main>
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const sh=a=>[...a].sort(()=>Math.random()-.5);
+const tabs=$$('.tab'),pans=$$('.pan');
+function go(i){tabs.forEach((t,j)=>t.setAttribute('aria-selected',j==i));pans.forEach((p,j)=>p.hidden=j!=i);if(i==4)karya();scrollTo(0,0)}
+tabs.forEach((t,i)=>t.onclick=()=>go(i));go(0);
+function drag(items,zs,drop){items.forEach(el=>{el.style.touchAction='none';el.onpointerdown=e=>{if(el.dataset.done)return;e.preventDefault();const r=el.getBoundingClientRect(),g=el.cloneNode(true),ox=e.clientX-r.left,oy=e.clientY-r.top;g.style.cssText=`position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;z-index:99;pointer-events:none;opacity:.9;margin:0`;document.body.append(g);el.style.opacity=.3;
+const mv=v=>{g.style.left=v.clientX-ox+'px';g.style.top=v.clientY-oy+'px'},up=v=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up);removeEventListener('pointercancel',up);g.remove();el.style.opacity=1;const z=document.elementFromPoint(v.clientX,v.clientY)?.closest(zs);if(z)drop(el,z)};
+addEventListener('pointermove',mv);addEventListener('pointerup',up);addEventListener('pointercancel',up)}})}
+/* 1 awal */
+const caps=['Ombak: “Aku menerjang karang dengan marah!”','Sungai: “Aku meliuk menari menuju laut.”','Angin: “Aku berbisik di telinga pohon.”','Jika ombak dan sungai bisa berbicara, apa yang akan mereka katakan?'];
+let ci=0,tm=null;const vid=$('#vid');vid.classList.add('paused');
+$('#play').onclick=function(){const p=vid.classList.toggle('paused');this.textContent=p?'Putar':'Jeda';clearInterval(tm);if(!p){$('#cap').textContent=caps[ci=0];tm=setInterval(()=>$('#cap').textContent=caps[ci=(ci+1)%3],3000)}};
+$('#ask').onclick=()=>$('#cap').textContent=caps[3];
+const nm=()=>$('#names').value.split(/[,\n]/).map(s=>s.trim()).filter(Boolean);let rot=0;
+function dw(){const n=nm(),a=360/n.length,P=(d)=>[100+95*Math.cos((d-90)*Math.PI/180),100+95*Math.sin((d-90)*Math.PI/180)];$('#wheel').innerHTML=n.length<2?'':n.map((t,i)=>{const[x1,y1]=P(i*a),[x2,y2]=P((i+1)*a);return `<path d="M100 100L${x1} ${y1}A95 95 0 0 1 ${x2} ${y2}z" fill="hsl(${i*360/n.length} 65% 68%)" stroke="#fff"/><text transform="rotate(${(i+.5)*a} 100 100)" x="100" y="30" text-anchor="middle" font-size="11" font-weight="700" fill="#0b2a3d">${t.slice(0,10).replace(/</g,'')}</text>`}).join('')}
+$('#names').oninput=dw;dw();
+$('#spin').onclick=function(){const n=nm();if(n.length<2){$('#win').textContent='Isi minimal 2 nama.';return}this.disabled=true;$('#win').textContent='';rot+=1440+Math.random()*360;$('#wheel').style.transform=`rotate(${rot}deg)`;setTimeout(()=>{this.disabled=false;$('#win').textContent='Giliran: '+n[Math.floor(((360-rot%360)%360)/(360/n.length))]},4100)};
+/* 2 memahami */
+const cv=$('#pen'),cx=cv.getContext('2d');let col='#e0584a',er=false,dr=false,lx,ly;
+const pt=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
+cv.onpointerdown=e=>{dr=true;[lx,ly]=pt(e);cv.setPointerCapture(e.pointerId)};
+cv.onpointermove=e=>{if(!dr)return;const[x,y]=pt(e);cx.globalCompositeOperation=er?'destination-out':'source-over';cx.strokeStyle=col;cx.lineWidth=er?30:5;cx.lineCap='round';cx.beginPath();cx.moveTo(lx,ly);cx.lineTo(x,y);cx.stroke();lx=x;ly=y};
+cv.onpointerup=cv.onpointercancel=()=>dr=false;
+$$('.pc').forEach(b=>b.onclick=()=>{col=b.dataset.c;er=false});$('#er').onclick=()=>er=true;$('#clr').onclick=()=>cx.clearRect(0,0,cv.width,cv.height);
+const M=[['Angin','berbisik'],['Bulan','mengintip'],['Ombak','marah'],['Pohon','melambai'],['Hujan','menangis']];let mc=0;
+$('#bends').innerHTML=sh(M).map(m=>`<div class="chip" data-k="${m[0]}">${m[0]}</div>`).join('<br>');
+$('#slots').innerHTML=sh(M).map(m=>`<div class="slot" data-k="${m[0]}">…… ${m[1]}</div>`).join('');
+drag($$('#bends .chip'),'.slot',(el,z)=>{if(z.classList.contains('ok'))return;if(el.dataset.k==z.dataset.k){z.classList.add('ok');z.innerHTML='<b>'+el.dataset.k+'</b> '+z.textContent.replace('…… ','')+' ✓';el.dataset.done=1;el.style.opacity=.3;$('#mmsg').textContent=++mc==5?'Hebat! Semua benda sudah “berperilaku” seperti manusia.':'Tepat!'}else{z.classList.add('no');setTimeout(()=>z.classList.remove('no'),400);$('#mmsg').textContent='Belum cocok. Benda apa yang biasanya melakukan itu dalam bayanganmu?'}});
+/* 3 mengaplikasi 1 */
+const S=[['Hujan deras menangis sepanjang malam.','P','Hujan (benda alam) diberi perilaku manusia: menangis.'],['Sungai di dekat desa meluap.','N','Meluap adalah peristiwa nyata, bukan perilaku manusia.'],['Air sungai marah dan menerjang rumah-rumah warga.','P','Air diberi perasaan manusia: marah.'],['Pohon-pohon di tepi sungai menunduk sedih.','P','Pohon diberi perasaan manusia: sedih.'],['Warga mengungsi ke tempat yang aman.','N','Pelakunya manusia, jadi bukan personifikasi.'],['Matahari tersenyum ketika banjir surut.','P','Matahari diberi perilaku manusia: tersenyum.']];
+$('#txt').innerHTML=S.map(s=>`<span class="sent" role="button" tabindex="0">${s[0]}</span> `).join('');
+$$('.sent').forEach(e=>{e.onclick=()=>e.classList.toggle('hl');e.onkeydown=k=>{if(k.key=='Enter'||k.key==' '){k.preventDefault();e.click()}}});
+let sc3=0;$('#pool').innerHTML=sh(S.map((s,i)=>i)).map(i=>`<div class="cardS" data-i="${i}">${S[i][0]}</div>`).join('');
+drag($$('.cardS'),'.zone',(el,z)=>{const s=S[el.dataset.i];if(z.dataset.z==s[1]){el.dataset.done=1;el.style.opacity=1;el.style.cursor='default';el.innerHTML+=`<small>${s[2]}</small>`;z.append(el);z.classList.add('ok');$('#smsg').textContent=++sc3==6?'Selesai! Semua kalimat sudah tepat.':'Benar! '+sc3+' dari 6.'}else{z.classList.add('no');setTimeout(()=>z.classList.remove('no'),400);$('#smsg').textContent='Coba lagi. Apakah pelakunya melakukan hal yang biasa dilakukan manusia?'}});
+/* 4 mengaplikasi 2 */
+const SC={Pantai:['#9ad7f0','<circle cx="330" cy="45" r="24" fill="#ffd24a"/><rect y="110" width="400" height="90" fill="#1f8fb5"/><path d="M0 130q25-14 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0v70H0z" fill="#46b3d3"/><path d="M0 175q200-30 400 0v25H0z" fill="#f0d9a0"/>','Ombak berlari menyapa pasir,\nAngin berbisik pada layar perahu.'],
+Sungai:['#bfe6f5','<circle cx="60" cy="40" r="22" fill="#ffd24a"/><rect y="100" width="400" height="100" fill="#6dbb6d"/><path d="M200 200q-120-30-40-60t60-40" fill="none" stroke="#3a9ad9" stroke-width="22" stroke-linecap="round"/>','Sungai meliuk menari di antara sawah,\nBatu-batu tersenyum dibelai air.'],
+Gunung:['#cfe3f7','<circle cx="330" cy="40" r="20" fill="#ffd24a"/><path d="M0 200L110 50l90 150zM140 200L270 70l130 130z" fill="#7a8696"/><path d="M110 50l-22 32 22-8 18 8zM270 70l-20 28 20-8 18 8z" fill="#fff"/><rect y="170" width="400" height="30" fill="#4d9a55"/>','Gunung berselimut kabut tebal,\nMentari mengintip malu dari puncak.'],
+Hujan:['#7e8c9a','<ellipse cx="110" cy="50" rx="70" ry="28" fill="#4b5663"/><ellipse cx="250" cy="40" rx="80" ry="30" fill="#434c57"/><path d="M80 90l-8 24M130 90l-8 24M200 80l-8 24M260 80l-8 24M310 90l-8 24M160 130l-8 24M240 130l-8 24" stroke="#cfe9ff" stroke-width="4" stroke-linecap="round"/><rect y="170" width="400" height="30" fill="#3f6f55"/>','Awan hitam menangis pelan,\nAtap rumah bernyanyi menyambut air.']};
+$('#thumbs').innerHTML=Object.keys(SC).map(k=>`<button class="thumb" aria-pressed="false">${k}</button>`).join('');
+$$('.thumb').forEach(b=>b.onclick=()=>{$$('.thumb').forEach(x=>x.setAttribute('aria-pressed',x==b));const s=SC[b.textContent];$('#scene').innerHTML=`<svg viewBox="0 0 400 200" role="img" aria-label="Pemandangan ${b.textContent}"><rect width="400" height="200" fill="${s[0]}"/>${s[1]}</svg>`;$('#guru').textContent='Contoh dari guru:\n'+s[2]});$('.thumb').click();
+$('#bank').innerHTML='tersenyum menari berbisik menangis marah menyapa melambai mengintip berlari bernyanyi'.split(' ').map(w=>`<button class="chip" style="cursor:pointer">${w}</button>`).join('');
+$$('#bank .chip').forEach(b=>b.onclick=()=>{const p=$('#poem');p.value+=(p.value&&!/\s$/.test(p.value)?' ':'')+b.textContent+' ';p.focus()});
+/* 5 penutup */
+function karya(){$('#kar').textContent=($('#jud').value?$('#jud').value+'\n\n':'')+($('#poem').value||'Karyamu akan tampil di sini. Tulis puisi di tahap Mengaplikasi 2.')}
+$('#jud').oninput=karya;
+const Q=[['Majas yang memberikan sifat manusia kepada benda mati disebut ….',['hiperbola','personifikasi','perumpamaan','repetisi'],1],['Kalimat yang termasuk personifikasi adalah ….',['Adik berlari kencang.','Bulan mengintip dari balik awan.','Ibu memasak di dapur.','Burung terbang tinggi.'],1],['“Angin berbisik di telinga pohon.” Benda yang dimanusiakan adalah ….',['telinga','pohon','angin','bisik'],2],['Perilaku manusia pada “Matahari tersenyum menyambut pagi” adalah ….',['matahari','pagi','tersenyum','sinar'],2],['Lengkapi agar menjadi personifikasi: “Ombak … karang dengan marah.”',['menerjang','membeku','mengering','membaca'],0]];
+let qi=0,qs=0;
+function rq(){const b=$('#quiz');if(qi>=5){b.innerHTML=`<p style="font-size:1.5rem"><b>Nilai kamu: ${qs*20}</b> (${qs} dari 5 benar)</p><button id="rs">Ulangi kuis</button>`;$('#rs').onclick=()=>{qi=qs=0;rq()};return}
+const[q,o,a]=Q[qi];b.innerHTML=`<p><b>Soal ${qi+1} dari 5.</b> ${q}</p>`+o.map((t,i)=>`<button class="opt">${'abcd'[i]}. ${t}</button>`).join('')+'<p id="fb"></p>';
+$$('.opt',b).forEach((x,i)=>x.onclick=()=>{if(b.dataset.l)return;b.dataset.l=1;if(i==a){qs++;x.classList.add('ok')}else{x.classList.add('no');$$('.opt',b)[a].classList.add('ok')}$('#fb').innerHTML=(i==a?'Benar! ':'Belum tepat. ')+'<button id="nx">'+(qi==4?'Lihat nilai':'Soal berikutnya')+'</button>';$('#nx').onclick=()=>{qi++;delete b.dataset.l;rq()}})}
+rq();
+const E=[['😄','Senang sekali'],['🙂','Senang'],['😐','Biasa saja'],['😕','Bingung'],['😢','Masih sulit']],ec=[0,0,0,0,0];
+$('#emos').innerHTML=E.map((e,i)=>`<button class="emo" aria-label="${e[1]}">${e[0]} <small id="c${i}">0</small></button>`).join('');
+$$('.emo').forEach((b,i)=>b.onclick=()=>{ec[i]++;$('#c'+i).textContent=ec[i];$('#emsg').textContent='Perasaan terbanyak: '+E[ec.indexOf(Math.max(...ec))][1]+'. Terima kasih sudah berbagi.'});
+</script></body></html>
